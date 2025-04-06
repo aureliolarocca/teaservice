@@ -42,6 +42,7 @@ nav div:nth-of-type(1) {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 nav div:nth-of-type(2) {
   width: auto;
@@ -148,7 +149,30 @@ header img {
 }
 .i-nostri-servizi {
   width: 100vw;
-  height: 100vh;
+  height: auto;
   background-color: var(--titolo);
   margin-top: 3rem;
+}
+.i-nostri-servizi h3 {
+  font-size: 2rem;
+  color: var(--ciao);
+  margin-left: 1.5rem;
+  margin-top: 3rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 3rem;
+  justify-items: center; /* centra i div nelle celle */
+}
+
+.grid div {
+  width: 90%;
+  height: 15rem;
+  background-color: var(--sezioni);
+  text-align: center;
+  border-radius: 1rem;
+  color: white;
+  margin-bottom: 1rem;
 }
