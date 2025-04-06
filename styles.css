@@ -62,7 +62,7 @@ nav img {
 }
 #logo {
   color: var(--titolo);
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .ham-men1,
 .ham-men2,
@@ -86,7 +86,7 @@ header div {
 h1 {
   color: #f3f4f6;
   position: absolute;
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 5rem;
   top: 1.5rem;
   padding: 1rem;
