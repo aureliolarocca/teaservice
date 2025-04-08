@@ -175,4 +175,27 @@ header img {
   border-radius: 1rem;
   color: white;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.grid div span {
+  font-size: 4rem;
+  overflow: hidden;
+  margin-top: 0.8rem;
+}
+.grid div h4 {
+  font-size: 0.9rem;
+  width: 90%;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.grid div p {
+  color: white;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  overflow: hidden;
+  font-weight: 100;
 }
