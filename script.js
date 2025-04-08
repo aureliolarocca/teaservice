@@ -11,3 +11,23 @@ window.addEventListener("scroll", function () {
     nav.style.pointerEvents = "auto";
   }
 });
+
+const hamMen = document.querySelector(".container-ham-men");
+
+if (hamMen) {
+  hamMen.addEventListener("click", () => {
+    const menuActive = document.querySelector(".menuHam");
+    if (menuActive) {
+      menuActive.classList.toggle("active");
+    }
+  });
+}
+
+const closeBtnHamMen = document.querySelector("#close-ham-men");
+
+closeBtnHamMen.addEventListener("click", () => {
+  const menuActive = document.querySelector(".menuHam");
+  if (menuActive) {
+    menuActive.classList.toggle("active");
+  }
+});
