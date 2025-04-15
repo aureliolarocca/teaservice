@@ -31,3 +31,15 @@ closeBtnHamMen.addEventListener("click", () => {
     menuActive.classList.toggle("active");
   }
 });
+
+const lazyElements = document.querySelectorAll(".lazy-scroll");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+});
+
+lazyElements.forEach((el) => observer.observe(el));
