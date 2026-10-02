@@ -120,20 +120,75 @@ ul,ol{margin:0;padding:0;list-style:none}
 }
 
 /* ---------- Hero ---------- */
-.hero{position:relative;isolation:isolate;color:#fff;background:var(--ink);overflow:hidden}
-.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% 40%;z-index:-2}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(23,20,15,.9) 0%,rgba(23,20,15,.76) 42%,rgba(23,20,15,.18) 100%)}
-.hero__content{padding-block:clamp(72px,11vw,150px) clamp(64px,9vw,120px);max-width:var(--wrap)}
-.hero__copy{max-width:680px}
+/* Foto "Quartarone Partners" (1070x1470, verticale) a tutto schermo, testi in HTML sopra.
+   Nella foto il logo sta in alto a sinistra (fino a ~31% della larghezza in altezza) e i volti
+   tra ~64% e ~83%: su telefono la foto è larga quanto lo schermo e non viene tagliata, così il
+   titolo va nello spazio di cielo tra logo e volti e il resto sotto i volti, sul fondo scuro.
+   Su computer la foto è intera a destra e i testi a sinistra, su una versione sfocata della foto. */
+.hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--ink);
+  min-height:calc(100svh - var(--header-h))}
+.hero__media{position:absolute;top:0;left:0;width:100%;aspect-ratio:1070/1470;margin:0;z-index:-1}
+.hero__img{display:block;width:100%;height:100%;object-fit:cover}
+.hero__media::after{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 80% 17% at 30% 34%,rgba(14,11,7,.62),rgba(14,11,7,0) 100%),
+  linear-gradient(180deg,rgba(23,20,15,0) 61%,rgba(23,20,15,.55) 72%,rgba(23,20,15,.86) 88%,#17140f 100%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(23,20,15,0),rgba(23,20,15,.7) 55%,rgba(23,20,15,.9))}
+.hero__inner{position:relative;display:flex;flex-direction:column;min-height:inherit;padding-top:32vw;padding-bottom:28px}
+.hero__top{min-height:53vw}
+.hero__title{margin:0;color:#fff;font-size:clamp(2rem,9vw,4.2rem);line-height:1.02;letter-spacing:-.03em;
+  text-shadow:0 2px 22px rgba(0,0,0,.5)}
+.hero__gold{color:#e6bc68}
+.hero__logo{display:none}
+.hero__bottom{margin-top:auto;max-width:560px}
+.hero__lead{margin:0 0 .9em;font-size:clamp(1rem,.9rem + .5vw,1.25rem);line-height:1.5;color:#f3eee4;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hero__lead--accent{margin-bottom:1.4em;color:#e6c27a;font-family:var(--serif);font-style:italic;font-weight:600;
+  font-size:clamp(1.06rem,.95rem + .6vw,1.4rem);line-height:1.38}
+.hero__lead span{display:block}
+.btn-pill{display:inline-flex;align-items:center;gap:.75em;min-height:52px;padding:.8em 1.7em;border-radius:999px;
+  background:linear-gradient(180deg,#ecca82 0%,#d3a457 100%);color:var(--ink);font-weight:700;font-size:.95rem;
+  letter-spacing:.09em;text-transform:uppercase;text-decoration:none;box-shadow:0 8px 26px rgba(0,0,0,.35);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.btn-pill .ic{width:1.25em;height:1.25em;transition:transform .18s ease}
+.btn-pill:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.btn-pill:hover .ic{transform:translateX(3px)}
 .eyebrow{display:inline-flex;align-items:center;gap:.7em;margin:0 0 1.1em;font-size:.8rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk)}
 .eyebrow::before{content:"";width:34px;height:2px;background:var(--gold)}
 .hero .eyebrow,.on-dark .eyebrow{color:var(--gold-lt)}
-.hero h1{color:#fff}
-.hero__lead{font-size:clamp(1.05rem,.95rem + .5vw,1.25rem);color:#ece6d8;max-width:58ch;margin-bottom:1.8em}
+
+/* telefono: lascia libero lo spazio della barra fissa "Chiama / WhatsApp" in basso */
 @media (max-width:899px){
-  .hero::before{background:linear-gradient(180deg,rgba(23,20,15,.62) 0%,rgba(23,20,15,.82) 100%)}
-  .hero__img{object-position:44% 30%}
+  .hero{min-height:calc(100svh - var(--header-h) - 64px - env(safe-area-inset-bottom))}
+  .hero__inner{padding-bottom:20px}
+  .hero__lead{font-size:.95rem;margin-bottom:.75em}
+  .hero__lead--accent{font-size:1.02rem;margin-bottom:1.1em}
+  .btn-pill{min-height:48px;font-size:.88rem}
 }
+
+/* computer: foto "zoomata" a tutta larghezza. La foto è verticale, quindi in un riquadro
+   orizzontale si vede solo una fascia: la ancoriamo in modo che il bordo basso cada appena sotto
+   i volti (riga 950 di 1470 della foto), su ogni larghezza. Il logo della foto resta fuori
+   inquadratura e lo rimettiamo sopra il titolo come immagine a parte (ritagliata dalla foto).
+   I testi sono ancorati in basso, sopra le spalle: così non coprono mai i volti. */
+@media (min-width:1000px){
+  .hero{--hero-h:clamp(560px,min(calc(100svh - var(--header-h)),56vw),980px);min-height:0;height:var(--hero-h)}
+  .hero__media{top:auto;bottom:max(-48.6vw,calc(100% - 137.38vw))}
+  .hero__media::after{background:
+    linear-gradient(90deg,rgba(14,11,7,.8) 0%,rgba(14,11,7,.56) 26%,rgba(14,11,7,.12) 46%,rgba(14,11,7,0) 58%),
+    linear-gradient(180deg,rgba(14,11,7,.35) 0%,rgba(14,11,7,0) 22%)}
+  .hero::after{height:22%;background:linear-gradient(180deg,rgba(23,20,15,0),rgba(23,20,15,.55))}
+  .hero__inner{max-width:none;height:100%;min-height:0;justify-content:flex-end;
+    padding:24px 24px calc(6.5vw + 18px) 10.4vw}
+  .hero__top{min-height:0}
+  .hero__title{font-size:clamp(2.6rem,4.2vw,4.6rem)}
+  .hero__bottom{margin-top:1.2rem;max-width:min(560px,40vw)}
+  .hero__top,.hero__bottom{flex-shrink:0}
+  .hero__logo{width:clamp(0px,min(12vw,calc((var(--hero-h) - 19.35vw - 340px) * 1.34)),230px);
+    height:auto;margin:0 0 .9rem -.6vw}
+}
+/* il logo ritagliato solo dove c'è spazio sopra il titolo */
+@media (min-width:1180px) and (min-height:760px){.hero__logo{display:block}}
+@media (min-width:1600px) and (max-height:860px){.hero__logo{display:none}}
 
 .trust{background:var(--ink);color:#e9e2d3;border-top:1px solid rgba(255,255,255,.08)}
 .trust ul{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
@@ -263,7 +318,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .error-title{font-size:clamp(2rem,6vw,3rem)}
 
 /* ---------- Breadcrumb ---------- */
-.breadcrumb{padding-top:22px}
+/* il percorso sta sopra la fascia scura del titolo: stesso sfondo, a tutta larghezza */
+.breadcrumb{padding-block:22px 0;background:var(--ink);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax)}
 .breadcrumb ol{display:flex;flex-wrap:wrap;gap:6px;font-size:.88rem;color:#b9b19f}
 .breadcrumb li{display:flex;align-items:center;gap:6px}
 .breadcrumb li+li::before{content:"/";color:#6b6353}
