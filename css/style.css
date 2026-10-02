@@ -123,19 +123,20 @@ ul,ol{margin:0;padding:0;list-style:none}
 /* Foto "Quartarone Partners" (1070x1470, verticale) a tutto schermo, testi in HTML sopra.
    Nella foto il logo sta in alto a sinistra (fino a ~31% della larghezza in altezza) e i volti
    tra ~64% e ~83%: su telefono la foto è larga quanto lo schermo e non viene tagliata, così il
-   titolo va nello spazio di cielo tra logo e volti e il resto sotto i volti, sul fondo scuro.
-   Su computer la foto è intera a destra e i testi a sinistra, su una versione sfocata della foto. */
+   titolo va nello spazio di cielo tra logo e volti e il resto sotto le braccia incrociate, sulla
+   parte bassa della foto che sfuma nel fondo scuro: le persone restano libere dalle scritte.
+   Su computer: vedi il blocco "computer" più sotto. */
 .hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--ink);
   min-height:calc(100svh - var(--header-h))}
 .hero__media{position:absolute;top:0;left:0;width:100%;aspect-ratio:1070/1470;margin:0;z-index:-1}
 .hero__img{display:block;width:100%;height:100%;object-fit:cover}
 .hero__media::after{content:"";position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 80% 17% at 30% 34%,rgba(14,11,7,.62),rgba(14,11,7,0) 100%),
-  linear-gradient(180deg,rgba(23,20,15,0) 61%,rgba(23,20,15,.55) 72%,rgba(23,20,15,.86) 88%,#17140f 100%)}
-.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;z-index:-1;pointer-events:none;
+  linear-gradient(180deg,rgba(23,20,15,0) 80%,rgba(23,20,15,.55) 88%,rgba(23,20,15,.88) 95%,#17140f 100%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;z-index:-1;pointer-events:none;
   background:linear-gradient(180deg,rgba(23,20,15,0),rgba(23,20,15,.7) 55%,rgba(23,20,15,.9))}
 .hero__inner{position:relative;display:flex;flex-direction:column;min-height:inherit;padding-top:32vw;padding-bottom:28px}
-.hero__top{min-height:53vw}
+.hero__top{min-height:86vw}
 .hero__title{margin:0;color:#fff;font-size:clamp(2rem,9vw,4.2rem);line-height:1.02;letter-spacing:-.03em;
   text-shadow:0 2px 22px rgba(0,0,0,.5)}
 .hero__gold{color:#e6bc68}
@@ -165,30 +166,32 @@ ul,ol{margin:0;padding:0;list-style:none}
   .btn-pill{min-height:48px;font-size:.88rem}
 }
 
-/* computer: foto "zoomata" a tutta larghezza. La foto è verticale, quindi in un riquadro
-   orizzontale si vede solo una fascia: la ancoriamo in modo che il bordo basso cada appena sotto
-   i volti (riga 950 di 1470 della foto), su ogni larghezza. Il logo della foto resta fuori
-   inquadratura e lo rimettiamo sopra il titolo come immagine a parte (ritagliata dalla foto).
-   I testi sono ancorati in basso, sopra le spalle: così non coprono mai i volti. */
+/* computer: la foto occupa il 76% della larghezza, a destra, e sfuma verso sinistra su una
+   versione sfocata e scura di sé stessa, dove stanno i testi. Così si vedono volti e braccia
+   incrociate (non solo le facce) e le persone stanno in centro-destra, mai sotto le scritte:
+   il corpo di Vincenzo inizia a ~46% della larghezza, i testi finiscono prima del 43%.
+   In verticale la foto è ancorata con le braccia incrociate (riga 1080 di 1470) sul bordo
+   basso; sugli schermi più "quadrati" si ferma in modo che il logo della foto resti fuori
+   (riga 345): il logo lo rimettiamo sopra il titolo, ritagliato dalla foto. */
 @media (min-width:1000px){
-  .hero{--hero-h:clamp(560px,min(calc(100svh - var(--header-h)),56vw),980px);min-height:0;height:var(--hero-h)}
-  .hero__media{top:auto;bottom:max(-48.6vw,calc(100% - 137.38vw))}
-  .hero__media::after{background:
-    linear-gradient(90deg,rgba(14,11,7,.8) 0%,rgba(14,11,7,.56) 26%,rgba(14,11,7,.12) 46%,rgba(14,11,7,0) 58%),
-    linear-gradient(180deg,rgba(14,11,7,.35) 0%,rgba(14,11,7,0) 22%)}
-  .hero::after{height:22%;background:linear-gradient(180deg,rgba(23,20,15,0),rgba(23,20,15,.55))}
-  .hero__inner{max-width:none;height:100%;min-height:0;justify-content:flex-end;
-    padding:24px 24px calc(6.5vw + 18px) 10.4vw}
+  .hero{--hero-h:clamp(560px,calc(100svh - var(--header-h)),980px);min-height:0;height:var(--hero-h);background:#120f0b}
+  .hero::before{content:"";position:absolute;inset:-60px;z-index:-3;
+    background:url("../img/hero-quartarone-640.webp") 0% 62%/cover no-repeat;filter:blur(30px) brightness(.42) saturate(1.1)}
+  .hero__media{left:auto;right:0;width:76vw;top:min(calc(100% - 76.71vw),-24.5vw);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 32%);mask-image:linear-gradient(90deg,transparent 0,#000 32%)}
+  .hero__media::after{background:linear-gradient(180deg,rgba(14,11,7,.3) 0%,rgba(14,11,7,0) 18%,rgba(14,11,7,0) 82%,rgba(14,11,7,.4) 100%)}
+  .hero::after{top:0;bottom:0;height:auto;width:62%;right:auto;
+    background:linear-gradient(90deg,rgba(14,11,7,.78) 0%,rgba(14,11,7,.55) 45%,rgba(14,11,7,0) 100%)}
+  .hero__inner{max-width:none;height:100%;min-height:0;justify-content:center;padding:32px 24px 32px 8vw}
   .hero__top{min-height:0}
-  .hero__title{font-size:clamp(2.6rem,4.2vw,4.6rem)}
-  .hero__bottom{margin-top:1.2rem;max-width:min(560px,40vw)}
   .hero__top,.hero__bottom{flex-shrink:0}
-  .hero__logo{width:clamp(0px,min(12vw,calc((var(--hero-h) - 19.35vw - 340px) * 1.34)),230px);
+  .hero__title{font-size:clamp(2.6rem,4.2vw,4.6rem)}
+  .hero__bottom{margin-top:1.2rem;max-width:min(560px,34vw)}
+  .hero__logo{width:clamp(0px,min(12vw,calc((var(--hero-h) - 12.85vw - 350px) * 1.34)),230px);
     height:auto;margin:0 0 .9rem -.6vw}
 }
 /* il logo ritagliato solo dove c'è spazio sopra il titolo */
 @media (min-width:1180px) and (min-height:760px){.hero__logo{display:block}}
-@media (min-width:1600px) and (max-height:860px){.hero__logo{display:none}}
 
 .trust{background:var(--ink);color:#e9e2d3;border-top:1px solid rgba(255,255,255,.08)}
 .trust ul{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
